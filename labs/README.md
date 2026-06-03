@@ -79,3 +79,32 @@ The pipeline uses three tokens:
 - **NIFIHUB_REGISTRY_PAT** — GitHub fine-grained PAT so the NiFi flow registry client can pull flow definitions from your fork
 
 In this lab, `SNOWFLAKE_PAT` and `NIFI_RUNTIME_PAT` are the same token. In production, you'd likely use separate service accounts with scoped roles.
+
+## Web IDE (SPCS) vs. Cortex Code CLI (Desktop)
+
+This lab uses the web-based Cortex Code IDE running inside Snowpark Container Services. Here's how it compares to running Cortex Code as a native desktop app:
+
+| | Web IDE (SPCS) | Cortex Code CLI (Desktop) |
+|---|---|---|
+| **Setup** | Zero — browser only, all tools pre-installed | Install app, configure Snowflake connection |
+| **Pre-provisioned secrets** | Mounted at `/etc/secrets/` in container | Must export manually or use `cortex secret store` |
+| **Network to Postgres** | Guaranteed (same Snowflake infra) | Depends on local network/VPN |
+| **Snowflake SQL** | Built-in (same) | Built-in (same) |
+| **File editing, git, gh** | Same agent capabilities | Same agent capabilities |
+| **Survives laptop close** | Yes (cloud process) | No (local process) |
+| **Editor experience** | Limited (REH web implementation) | Full native VS Code |
+| **Extensions/plugins** | Restricted subset | Full marketplace |
+| **Multi-monitor/keyboard** | Browser tab | Native OS integration |
+| **Offline work** | Not possible | Possible (without Snowflake) |
+
+**When to use the web IDE:**
+- Lab/workshop settings where uniform environments matter
+- Quick access from any machine without local setup
+- When network access to Snowflake-internal resources (like Postgres) is required
+
+**When to use the desktop CLI:**
+- Day-to-day development with full editor features
+- Projects that span Snowflake + local code/repos
+- When you need native OS integration (keybindings, multi-monitor, extensions)
+
+The agent capabilities (reading files, running SQL, executing bash, editing code) are identical in both environments.
