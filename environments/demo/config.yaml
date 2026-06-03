@@ -80,3 +80,4 @@ deployments:
               Snowflake Warehouse: "DEFAULT_WH"
               Table Storage Format: "STANDARD"
               Object Identifier Resolution: "CASE_INSENSITIVE"
+
