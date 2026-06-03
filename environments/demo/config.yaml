@@ -48,7 +48,7 @@ deployments:
             bucket: data-generator
             flow: postgres-cdc-demo
             version: latest
-            start: false
+            start: true
             assets:
               - name: "postgresql-42.7.10.jar"
                 url: "https://jdbc.postgresql.org/download/postgresql-42.7.10.jar"
@@ -65,7 +65,7 @@ deployments:
             definition: OPENFLOW_POSTGRES_CDC
             display_name: "My Postgres CDC Connector"
             comment: "CDC from Postgres to Snowflake"
-            start: false
+            start: true
             assets:
               - name: "postgresql-42.7.10.jar"
                 url: "https://jdbc.postgresql.org/download/postgresql-42.7.10.jar"
