@@ -236,6 +236,9 @@ class TestGroovyScript:
     def test_script_generates_order_items(self, groovy_script):
         assert "target_table: 'order_items'" in groovy_script or "target_table: \"order_items\"" in groovy_script
 
+    def test_script_generates_product_reviews(self, groovy_script):
+        assert "target_table: 'product_reviews'" in groovy_script or "target_table: \"product_reviews\"" in groovy_script
+
     def test_script_sets_priority_attributes(self, groovy_script):
         assert "priority:" in groovy_script
 
@@ -284,6 +287,11 @@ class TestInitSQL:
         assert "order_items" in init_sql.lower()
         assert "item_id" in init_sql.lower()
 
+    def test_creates_product_reviews_table(self, init_sql):
+        assert "product_reviews" in init_sql.lower()
+        assert "review_id" in init_sql.lower()
+        assert "rating" in init_sql.lower()
+
     def test_creates_publication(self, init_sql):
         assert "CREATE PUBLICATION" in init_sql
 
@@ -292,6 +300,7 @@ class TestInitSQL:
         assert "customers" in pub_section.lower()
         assert "orders" in pub_section.lower()
         assert "order_items" in pub_section.lower()
+        assert "product_reviews" in pub_section.lower()
 
     def test_no_replica_identity_full(self, init_sql):
         assert "REPLICA IDENTITY FULL" not in init_sql, (

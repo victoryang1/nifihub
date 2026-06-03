@@ -75,7 +75,7 @@ deployments:
               Source Database Connection URL: "jdbc:postgresql://bhkraqlqczcpnmiq7kmolkwrca.sfsehol-summit-26-de225-rtrdjw.us-west-2.aws.postgres.snowflake.app:5432/postgres?sslmode=require"
               Source Database User: "snowflake_admin"
               Source Database Password: "DEMO_DATABASE.POSTGRES.POSTGRES_PWD"
-              Included Comma Separated Source Table Names: "demo_postgres.customers,demo_postgres.orders,demo_postgres.order_items"
+              Included Comma Separated Source Table Names: "demo_postgres.customers,demo_postgres.orders,demo_postgres.order_items,demo_postgres.product_reviews"
               Snowflake Destination Database: "DEMO_DATABASE"
               Snowflake Warehouse: "DEFAULT_WH"
               Table Storage Format: "STANDARD"
