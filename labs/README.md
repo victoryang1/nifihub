@@ -50,6 +50,22 @@ For this lab, all Snowflake costs are covered by the provisioned lab account.
 
 ## How the CD Pipeline Works
 
+**CD = Continuous Deployment.** "Environment CD" means: every time you push a config change, the pipeline automatically deploys it to your Snowflake account — no manual SQL needed.
+
+### What is an "environment"?
+
+An environment is a named deployment target (e.g., `demo`, `staging`, `prod`). It ties together three things:
+
+| Layer | Location | What it holds |
+|---|---|---|
+| Repo folder | `environments/demo/config.yaml` | Desired-state config (runtimes, connectors, flows, network rules) |
+| GitHub Environment | `Settings → Environments → demo` | Scoped secrets and variables (PATs, account URL, role) — only accessible to workflow jobs targeting this environment |
+| Snowflake | `OPENFLOW.OPENFLOW` schema | The actual deployed infrastructure (runtimes, connectors, flows) |
+
+The GitHub Environment is **not compute** — it's just a secrets/variables namespace. The actual processing happens in Snowflake. GitHub Environments are free on public repos and provide secret scoping (so `prod` secrets can't leak into `dev` runs) and optional approval gates.
+
+### Pipeline steps
+
 The pipeline follows a **detect → diff → apply** pattern:
 
 1. **Detect** — On every push to `main` that touches `environments/**/config.yaml`, identify which environments changed.
